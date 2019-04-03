@@ -12,7 +12,7 @@ namespace PharmaStoreAPI.Controllers
         /// </summary>
         /// <returns>Medicine list</returns>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<string> GetMedicineList()
         {
             return new string[] { "value1", "value2" };
         }
@@ -23,7 +23,7 @@ namespace PharmaStoreAPI.Controllers
         /// <param name="id"></param>
         /// <returns>Medicine details</returns>
         [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        public string GetSpecificMedicineDetails(int id)
         {
             return "value";
         }
@@ -33,17 +33,7 @@ namespace PharmaStoreAPI.Controllers
         /// </summary>
         /// <param name="value"></param>
         [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void AddMedicine([FromBody] string value)
         {
         }
     }
