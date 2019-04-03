@@ -11,6 +11,8 @@ using System.Reflection;
 namespace PharmaStoreAPI
 {
     using Core.Repositories.Contracts;
+    using Microsoft.EntityFrameworkCore;
+    using PharmaStoreAPI.Core.Models;
     using PharmaStoreAPI.Core.Repositories;
 
     public class Startup
@@ -34,6 +36,10 @@ namespace PharmaStoreAPI
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
+
+            var optionsBuilder = new DbContextOptionsBuilder<PharmaStoreContext>();
+            optionsBuilder.UseSqlServer(Configuration.GetConnectionString("Database"));
+            var context = new PharmaStoreContext(optionsBuilder.Options);
 
             services.AddSingleton(typeof(IMedicinesRepository), typeof(MedicinesRepository));
         }
