@@ -1,20 +1,41 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-
-namespace PharmaStoreAPI.Controllers
+﻿namespace PharmaStoreAPI.Controllers
 {
+    using Core.Repositories.Contracts;
+    using Core.ViewModels.Medicines;
+    using Microsoft.AspNetCore.Mvc;
+    using PharmaStoreAPI.Helpers;
+
     [Route("api/[controller]")]
     [ApiController]
     public class MedicinesController : ControllerBase
     {
+        private readonly IMedicinesRepository _medicinesRepository;
+
+        public MedicinesController(IMedicinesRepository medicinesRepository)
+        {
+            _medicinesRepository = medicinesRepository;
+        }
+
         /// <summary>
         /// Get medicine list
         /// </summary>
         /// <returns>Medicine list</returns>
         [HttpGet]
-        public IEnumerable<string> GetMedicineList()
+        public IActionResult GetMedicineList([FromForm] GetMedicinesViewModel filters)
         {
-            return new string[] { "value1", "value2" };
+            if (ModelState.IsValid)
+            {
+                var result = _medicinesRepository.GetMedicineList(filters);
+
+                if (result.IsSuccess)
+                {
+                    return Ok(result.Result);
+                }
+
+                return BadRequest(result.Errors);
+            }
+
+            return BadRequest(GlobalHelpers.ModelStateError());
         }
 
         /// <summary>

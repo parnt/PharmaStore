@@ -1,4 +1,4 @@
-﻿namespace PharmaStoreAPI.ViewModels.Core
+﻿namespace PharmaStoreAPI.Core.ViewModels.Core
 {
     public class OperationError
     {

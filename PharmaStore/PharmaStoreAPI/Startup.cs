@@ -10,6 +10,9 @@ using System.Reflection;
 
 namespace PharmaStoreAPI
 {
+    using Core.Repositories.Contracts;
+    using PharmaStoreAPI.Core.Repositories;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -31,6 +34,8 @@ namespace PharmaStoreAPI
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
+
+            services.AddSingleton(typeof(IMedicinesRepository), typeof(MedicinesRepository));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

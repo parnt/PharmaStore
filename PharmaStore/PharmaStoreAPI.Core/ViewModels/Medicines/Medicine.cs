@@ -1,4 +1,4 @@
-﻿namespace PharmaStoreAPI.ViewModes.Medicines
+﻿namespace PharmaStoreAPI.Core.ViewModels.Medicines
 {
     public class Medicine
     {

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace PharmaStoreAPI.ViewModels.Core
+namespace PharmaStoreAPI.Core.ViewModels.Core
 {
-    public class OperationResult<T> where T : class 
+    public class OperationResult<T> where T : class
     {
         public Result<T> Result { get; set; }
 

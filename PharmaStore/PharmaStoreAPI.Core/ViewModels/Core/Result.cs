@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace PharmaStoreAPI.ViewModels.Core
+namespace PharmaStoreAPI.Core.ViewModels.Core
 {
     public class Result<T> where T : class
     {

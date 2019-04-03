@@ -1,4 +1,4 @@
-﻿namespace PharmaStoreAPI.Enums
+﻿namespace PharmaStoreAPI.Core.Enums
 {
     public enum MedicineTypes
     {
