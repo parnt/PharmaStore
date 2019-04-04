@@ -26,8 +26,7 @@
         {
             if (ModelState.IsValid)
             {
-                if (!string.IsNullOrEmpty(filters.SearchValue))
-                    filters.SearchValue = filters.SearchValue.Trim();
+                filters.SearchValue = filters.SearchValue.TrimString();
 
                 var result = _medicinesRepository.GetMedicineList(filters);
 
