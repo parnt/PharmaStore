@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DatabaseError" xml:space="preserve">
+    <value>Wystąpił problem z bazą danych</value>
+  </data>
+  <data name="ItemNotFound" xml:space="preserve">
+    <value>Nie znaleziono przedmiotu o podanym ID</value>
+  </data>
   <data name="ModalStateError" xml:space="preserve">
     <value>Wprowadzono dane w niewłaściwy sposób</value>
   </data>

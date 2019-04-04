@@ -1,13 +1,31 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace PharmaStoreAPI.Core.Models
+﻿namespace PharmaStoreAPI.Core.Models
 {
     using Medicines;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using System;
 
-    public class PharmaStoreContext : DbContext
+    public partial class PharmaStoreContext : DbContext
     {
+        public PharmaStoreContext()
+        {
+        }
+
         public PharmaStoreContext(DbContextOptions<PharmaStoreContext> options) : base(options)
         {
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            string projectPath = AppDomain.CurrentDomain.BaseDirectory.Split(new String[] { @"bin\" }, StringSplitOptions.None)[0];
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                .SetBasePath(projectPath)
+                .AddJsonFile("appsettings.json")
+                .Build();
+            var builder = new DbContextOptionsBuilder<PharmaStoreContext>();
+            var connectionString = configuration.GetConnectionString("Database");
+
+            optionsBuilder.UseSqlServer(connectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -50,8 +68,5 @@ namespace PharmaStoreAPI.Core.Models
                 new MedicineType {Id = 3, Name = "Capsules"}
             );
         }
-
-        public virtual DbSet<Medicine> Medicines { get; set; }
-        public virtual DbSet<MedicineType> MedicineTypes { get; set; }
     }
 }

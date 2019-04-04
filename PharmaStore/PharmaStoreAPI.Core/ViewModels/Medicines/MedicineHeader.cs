@@ -1,19 +1,15 @@
 ﻿namespace PharmaStoreAPI.Core.ViewModels.Medicines
 {
-    public class Medicine
+    public class MedicineHeader
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
-
-        public string MedicineTypeName { get; set; }
 
         public string ContentQuantity { get; set; }
 
         public decimal Price { get; set; }
 
         public string Producer { get; set; }
-
-        public string Description { get; set; }
     }
 }

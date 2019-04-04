@@ -19,12 +19,16 @@
         /// <summary>
         /// Get medicine list
         /// </summary>
+        /// <param name="filters"></param>
         /// <returns>Medicine list</returns>
         [HttpGet]
-        public IActionResult GetMedicineList([FromForm] GetMedicinesViewModel filters)
+        public IActionResult GetMedicineList([FromQuery] GetMedicinesViewModel filters)
         {
             if (ModelState.IsValid)
             {
+                if (!string.IsNullOrEmpty(filters.SearchValue))
+                    filters.SearchValue = filters.SearchValue.Trim();
+
                 var result = _medicinesRepository.GetMedicineList(filters);
 
                 if (result.IsSuccess)
@@ -44,9 +48,21 @@
         /// <param name="id"></param>
         /// <returns>Medicine details</returns>
         [HttpGet("{id}", Name = "Get")]
-        public string GetSpecificMedicineDetails(int id)
+        public IActionResult GetSpecificMedicineDetails(int id)
         {
-            return "value";
+            if (ModelState.IsValid)
+            {
+                var result = _medicinesRepository.GetMedicineDetails(id);
+
+                if (result.IsSuccess)
+                {
+                    return Ok(result.Result);
+                }
+
+                return BadRequest(result.Errors);
+            }
+
+            return BadRequest(GlobalHelpers.ModelStateError());
         }
 
         /// <summary>

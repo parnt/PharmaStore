@@ -1,20 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace PharmaStoreAPI.Core.ViewModels.Core
+﻿namespace PharmaStoreAPI.Core.ViewModels.Core
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
     public class Result<T> where T : class
     {
         public int TotalCount { get; set; }
 
-        public string Message { get; set; }
-
         public T Items { get; set; }
 
-        public Result(T items, string message = null)
+        public Result(T items)
         {
             Items = items;
-            Message = message;
 
             if (Items != null)
             {

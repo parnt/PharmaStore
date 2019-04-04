@@ -6,13 +6,7 @@
 
     public class GlobalHelpers
     {
-        public static OperationError ModelStateError()
-        {
-            return new OperationError
-            {
-                ErrorCode = (int) ErrorCodes.BadRequest,
-                Message = ErrorResources.ModalStateError
-            };
-        }
+        public static OperationError ModelStateError() =>
+            new OperationError((int) ErrorCodes.BadRequest, ErrorResources.ModalStateError);
     }
 }

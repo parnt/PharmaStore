@@ -1,12 +1,10 @@
 ﻿namespace PharmaStoreAPI.Core.ViewModels.Medicines
 {
-    public class Medicine
+    public class CreateMedicineViewModel
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
-        public string MedicineTypeName { get; set; }
+        public int MedicineTypeId { get; set; }
 
         public string ContentQuantity { get; set; }
 

@@ -10,15 +10,21 @@ namespace PharmaStoreAPI.Core.ViewModels.Core
 
         public IEnumerable<OperationError> Errors { get; set; }
 
-        public OperationResult(T result, string message = null)
+        public OperationResult(T result)
         {
-            Result = new Result<T>(result, message);
+            Result = new Result<T>(result);
             IsSuccess = true;
         }
 
         public OperationResult(IEnumerable<OperationError> errors)
         {
             Errors = errors;
+            IsSuccess = false;
+        }
+
+        public OperationResult(OperationError error)
+        {
+            Errors = new List<OperationError> {error};
             IsSuccess = false;
         }
     }

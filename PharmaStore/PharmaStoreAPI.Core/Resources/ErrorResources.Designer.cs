@@ -61,6 +61,24 @@ namespace PharmaStoreAPI.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wystąpił problem z bazą danych.
+        /// </summary>
+        public static string DatabaseError {
+            get {
+                return ResourceManager.GetString("DatabaseError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nie znaleziono przedmiotu o podanym ID.
+        /// </summary>
+        public static string ItemNotFound {
+            get {
+                return ResourceManager.GetString("ItemNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wprowadzono dane w niewłaściwy sposób.
         /// </summary>
         public static string ModalStateError {

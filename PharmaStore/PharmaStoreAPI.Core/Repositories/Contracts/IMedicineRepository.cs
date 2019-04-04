@@ -1,11 +1,12 @@
-﻿using PharmaStoreAPI.Core.ViewModels.Core;
-using PharmaStoreAPI.Core.ViewModels.Medicines;
-using System.Collections.Generic;
-
-namespace PharmaStoreAPI.Core.Repositories.Contracts
+﻿namespace PharmaStoreAPI.Core.Repositories.Contracts
 {
+    using PharmaStoreAPI.Core.ViewModels.Core;
+    using PharmaStoreAPI.Core.ViewModels.Medicines;
+    using System.Collections.Generic;
+
     public interface IMedicinesRepository
     {
-        OperationResult<IEnumerable<Medicine>> GetMedicineList(GetMedicinesViewModel filters);
+        OperationResult<IEnumerable<MedicineHeader>> GetMedicineList(GetMedicinesViewModel filters);
+        OperationResult<Medicine> GetMedicineDetails(int id);
     }
 }
