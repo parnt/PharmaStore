@@ -22,24 +22,24 @@ namespace PharmaStoreAPI.Core.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ErrorResources {
+    internal class ResultResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ErrorResources() {
+        internal ResultResources() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PharmaStoreAPI.Core.Resources.ErrorResources", typeof(ErrorResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PharmaStoreAPI.Core.Resources.ResultResources", typeof(ResultResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace PharmaStoreAPI.Core.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,56 +61,11 @@ namespace PharmaStoreAPI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wystąpił problem z bazą danych.
+        ///   Looks up a localized string similar to Nowy lek został dodany.
         /// </summary>
-        public static string DatabaseError {
+        internal static string CreatingMedicineComplete {
             get {
-                return ResourceManager.GetString("DatabaseError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Pole nie może być puste.
-        /// </summary>
-        public static string FieldCannotBeEmpty {
-            get {
-                return ResourceManager.GetString("FieldCannotBeEmpty", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Pole może powinno zawierać {0} - {1} znaków.
-        /// </summary>
-        public static string InvalidFieldLength {
-            get {
-                return ResourceManager.GetString("InvalidFieldLength", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Wprowadzono niewłaściwe dane.
-        /// </summary>
-        public static string InvalidInsertDatabaseData {
-            get {
-                return ResourceManager.GetString("InvalidInsertDatabaseData", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Nie znaleziono przedmiotu o podanym ID.
-        /// </summary>
-        public static string ItemNotFound {
-            get {
-                return ResourceManager.GetString("ItemNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Wprowadzono dane w niewłaściwy sposób.
-        /// </summary>
-        public static string ModalStateError {
-            get {
-                return ResourceManager.GetString("ModalStateError", resourceCulture);
+                return ResourceManager.GetString("CreatingMedicineComplete", resourceCulture);
             }
         }
     }

@@ -65,12 +65,28 @@
         }
 
         /// <summary>
-        /// Add new medicine to DB
+        /// Create new Medicine
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="newMedicine"></param>
+        /// <returns>Information about complete operation</returns>
         [HttpPost]
-        public void AddMedicine([FromBody] string value)
+        public IActionResult AddMedicine([FromBody] MedicineInputModel newMedicine)
         {
+            if (ModelState.IsValid)
+            {
+                newMedicine = newMedicine.TrimObj();
+
+                var result = _medicinesRepository.CreateNewMedicine(newMedicine);
+
+                if (result.IsSuccess)
+                {
+                    return Ok(result.Result);
+                }
+
+                return BadRequest(result.Errors);
+            }
+
+            return BadRequest(GlobalHelpers.ModelStateError());
         }
     }
 }

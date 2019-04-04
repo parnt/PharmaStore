@@ -1,6 +1,6 @@
 ﻿namespace PharmaStoreAPI.Core.ViewModels.Medicines
 {
-    public class CreateMedicineViewModel
+    public class MedicineInputModel
     {
         public string Name { get; set; }
 

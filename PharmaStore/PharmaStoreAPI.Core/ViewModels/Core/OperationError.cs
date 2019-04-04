@@ -2,14 +2,17 @@
 {
     public class OperationError
     {
-        public OperationError(int errorCode, string message)
-        {
-            ErrorCode = errorCode;
-            Message = message;
-        }
-
         public int ErrorCode { get; set; }
 
         public string Message { get; set; }
+
+        public string FieldName { get; set; }
+
+        public OperationError(int errorCode, string message, string fieldName = null)
+        {
+            ErrorCode = errorCode;
+            Message = message;
+            FieldName = fieldName;
+        }
     }
 }
