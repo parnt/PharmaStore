@@ -37,10 +37,10 @@ namespace PharmaStoreAPI
                 c.IncludeXmlComments(xmlPath);
             });
 
-            var optionsBuilder = new DbContextOptionsBuilder<PharmaStoreContext>();
-            optionsBuilder.UseSqlServer(Configuration.GetConnectionString("Database"));
-            var context = new PharmaStoreContext(optionsBuilder.Options);
+            services.AddDbContext<PharmaStoreContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("Database")));
 
+            services.AddSingleton(new PharmaStoreContext());
             services.AddSingleton(typeof(IMedicinesRepository), typeof(MedicinesRepository));
         }
 

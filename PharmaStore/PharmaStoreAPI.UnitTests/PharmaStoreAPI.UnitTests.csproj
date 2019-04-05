@@ -16,10 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\PharmaStoreAPI.Core\PharmaStoreAPI.Core.csproj" />
     <ProjectReference Include="..\PharmaStoreAPI\PharmaStoreAPI.csproj" />
   </ItemGroup>

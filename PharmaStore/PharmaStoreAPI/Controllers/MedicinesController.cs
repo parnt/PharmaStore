@@ -90,5 +90,18 @@
 
             return BadRequest(GlobalHelpers.ModelStateError());
         }
+
+        [HttpGet("MedicineTypes")]
+        public IActionResult GetMedicineTypes()
+        {
+            var result = _medicinesRepository.GetMedicineTypes();
+
+            if (result.IsSuccess)
+            {
+                return Ok(result.Result);
+            }
+
+            return BadRequest(result.Errors);
+        }
     }
 }

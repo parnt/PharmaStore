@@ -9,5 +9,6 @@
         OperationResult<IEnumerable<MedicineHeader>> GetMedicineList(GetMedicinesViewModel filters);
         OperationResult<Medicine> GetMedicineDetails(int id);
         OperationResult<string> CreateNewMedicine(MedicineInputModel newMedicine);
+        OperationResult<IEnumerable<MedicineType>> GetMedicineTypes();
     }
 }

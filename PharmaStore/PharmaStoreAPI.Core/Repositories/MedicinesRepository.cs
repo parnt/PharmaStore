@@ -13,13 +13,18 @@
 
     public class MedicinesRepository : IMedicinesRepository
     {
+        private readonly PharmaStoreContext _context;
+
+        public MedicinesRepository(PharmaStoreContext context)
+        {
+            _context = context;
+        }
+
         public OperationResult<IEnumerable<MedicineHeader>> GetMedicineList(GetMedicinesViewModel filters)
         {
             try
             {
-                var context = new PharmaStoreContext();
-
-                var medicineList = context.Medicines.Where(x =>
+                var medicineList = _context.Medicines.Where(x =>
                     (filters == null || string.IsNullOrEmpty(filters.SearchValue))
                         ? true
                         : (x.MedicineType.Name.Contains(filters.SearchValue) ||
@@ -48,9 +53,7 @@
         {
             try
             {
-                var context = new PharmaStoreContext();
-
-                var medicine = context.Medicines.Where(x => x.Id == id)
+                var medicine = _context.Medicines.Where(x => x.Id == id)
                     .Select(x => new Medicine
                     {
                         Id = x.Id,
@@ -83,9 +86,10 @@
 
             try
             {
-                var context = new PharmaStoreContext();
+                if (!_context.MedicineTypes.Select(x => x.Id).Contains(newMedicine.MedicineTypeId))
+                    return new OperationResult<string>(new OperationError((int)ErrorCodes.BadRequest, ErrorResources.InvalidInsertDatabaseData));
 
-                context.Medicines.Add(new Models.Medicines.Medicine
+                _context.Medicines.Add(new Models.Medicines.Medicine
                 {
                     Name = newMedicine.Name,
                     MedicineTypeId = newMedicine.MedicineTypeId,
@@ -95,15 +99,11 @@
                     Description = newMedicine.Description
                 });
 
-                context.SaveChanges();
+                _context.SaveChanges();
 
                 return new OperationResult<string>(ResultResources.CreatingMedicineComplete);
             }
-            catch (DbUpdateException)
-            {
-                return new OperationResult<string>(new OperationError((int)ErrorCodes.BadRequest, ErrorResources.InvalidInsertDatabaseData));
-            }
-            catch (Exception)
+            catch
             {
                 return new OperationResult<string>(new OperationError((int)ErrorCodes.InternalServerError,
                     ErrorResources.DatabaseError));
@@ -118,7 +118,7 @@
             {
                 errors.Add(new OperationError((int) ErrorCodes.BadRequest, ErrorResources.FieldCannotBeEmpty, nameof(medicine.Name)));
             }
-            else if (medicine.Name.Length < 1 || medicine.Name.Length > 50)
+            else if (medicine.Name.Length < 2 || medicine.Name.Length > 50)
             {
                 var errorMessage = string.Format(ErrorResources.InvalidFieldLength, 1, 50);
 
@@ -129,7 +129,7 @@
             {
                 errors.Add(new OperationError((int)ErrorCodes.BadRequest, ErrorResources.FieldCannotBeEmpty, nameof(medicine.ContentQuantity)));
             }
-            else if (medicine.ContentQuantity.Length < 2 || medicine.ContentQuantity.Length > 10)
+            else if (medicine.ContentQuantity.Length < 3 || medicine.ContentQuantity.Length > 10)
             {
                 var errorMessage = string.Format(ErrorResources.InvalidFieldLength, 2, 10);
 
@@ -140,7 +140,7 @@
             {
                 errors.Add(new OperationError((int)ErrorCodes.BadRequest, ErrorResources.FieldCannotBeEmpty, nameof(medicine.Producer)));
             }
-            else if (medicine.Producer.Length < 1 || medicine.Producer.Length > 50)
+            else if (medicine.Producer.Length < 2 || medicine.Producer.Length > 50)
             {
                 var errorMessage = string.Format(ErrorResources.InvalidFieldLength, 1, 50);
 
@@ -151,7 +151,7 @@
             {
                 errors.Add(new OperationError((int)ErrorCodes.BadRequest, ErrorResources.FieldCannotBeEmpty, nameof(medicine.Description)));
             }
-            else if (medicine.Description.Length < 1 || medicine.Description.Length > 2000)
+            else if (medicine.Description.Length < 2 || medicine.Description.Length > 2000)
             {
                 var errorMessage = string.Format(ErrorResources.InvalidFieldLength, 1, 2000);
 
@@ -159,6 +159,25 @@
             }
 
             return errors;
+        }
+
+        public OperationResult<IEnumerable<MedicineType>> GetMedicineTypes()
+        {
+            try
+            {
+                var medicineTypes = _context.MedicineTypes.Select(x => new MedicineType
+                {
+                    Id = x.Id,
+                    Name = x.Name
+                }).ToList();
+
+                return new OperationResult<IEnumerable<MedicineType>>(medicineTypes);
+            }
+            catch
+            {
+                return new OperationResult<IEnumerable<MedicineType>>(
+                    new OperationError((int)ErrorCodes.InternalServerError, ErrorResources.DatabaseError));
+            }
         }
     }
 }

@@ -52,7 +52,7 @@ namespace PharmaStoreAPI.UnitTests.Controllers
                 .Returns(() =>
                     new OperationResult<IEnumerable<MedicineHeader>>(new List<MedicineHeader>(returnedMedicineList)));
 
-            MedicinesController medicinesController = new MedicinesController(mock.Object);
+            var medicinesController = new MedicinesController(mock.Object);
 
             // Act
             var result = medicinesController.GetMedicineList(It.IsAny<GetMedicinesViewModel>()) as OkObjectResult;
@@ -78,7 +78,7 @@ namespace PharmaStoreAPI.UnitTests.Controllers
                 .Returns(() =>
                     new OperationResult<IEnumerable<MedicineHeader>>(new List<MedicineHeader>(returnedMedicineList)));
 
-            MedicinesController medicinesController = new MedicinesController(mock.Object);
+            var medicinesController = new MedicinesController(mock.Object);
 
             // Act
             var result = medicinesController.GetMedicineList(searchValue) as OkObjectResult;
@@ -95,7 +95,7 @@ namespace PharmaStoreAPI.UnitTests.Controllers
         public void GetMedicineList_InvalidData_ModelStateError()
         {
             // Arrange
-            MedicinesController medicinesController = new MedicinesController(It.IsAny<IMedicinesRepository>());
+            var medicinesController = new MedicinesController(It.IsAny<IMedicinesRepository>());
 
             medicinesController.ModelState.AddModelError(string.Empty, string.Empty);
 
@@ -118,7 +118,7 @@ namespace PharmaStoreAPI.UnitTests.Controllers
                     new OperationResult<IEnumerable<MedicineHeader>>(
                         new OperationError((int) ErrorCodes.InternalServerError, ErrorResources.DatabaseError)));
 
-            MedicinesController medicinesController = new MedicinesController(mock.Object);
+            var medicinesController = new MedicinesController(mock.Object);
 
             // Act
             var result = medicinesController.GetMedicineList(It.IsAny<GetMedicinesViewModel>()) as BadRequestObjectResult;
@@ -149,7 +149,7 @@ namespace PharmaStoreAPI.UnitTests.Controllers
                         MedicineTypeName = "Tabletki"
                     }));
 
-            MedicinesController medicinesController = new MedicinesController(mock.Object);
+            var medicinesController = new MedicinesController(mock.Object);
 
             // Act
             var result = medicinesController.GetSpecificMedicineDetails(It.IsAny<int>()) as OkObjectResult;
@@ -165,7 +165,7 @@ namespace PharmaStoreAPI.UnitTests.Controllers
         public void GetSpecificMedicineDetails_InvalidData_ModelStateError()
         {
             // Arrange
-            MedicinesController medicinesController = new MedicinesController(It.IsAny<IMedicinesRepository>());
+            var medicinesController = new MedicinesController(It.IsAny<IMedicinesRepository>());
 
             medicinesController.ModelState.AddModelError(string.Empty, string.Empty);
 
@@ -188,7 +188,7 @@ namespace PharmaStoreAPI.UnitTests.Controllers
                     new OperationResult<Medicine>(
                         new OperationError((int)ErrorCodes.NotFound, ErrorResources.ItemNotFound)));
 
-            MedicinesController medicinesController = new MedicinesController(mock.Object);
+            var medicinesController = new MedicinesController(mock.Object);
 
             // Act
             var result = medicinesController.GetSpecificMedicineDetails(It.IsAny<int>()) as BadRequestObjectResult;
@@ -219,7 +219,7 @@ namespace PharmaStoreAPI.UnitTests.Controllers
             mock.Setup(x => x.CreateNewMedicine(model)).Returns(() =>
                 new OperationResult<string>(ResultResources.CreatingMedicineComplete));
 
-            MedicinesController medicinesController = new MedicinesController(mock.Object);
+            var medicinesController = new MedicinesController(mock.Object);
 
             // Act
             var result = medicinesController.AddMedicine(model) as OkObjectResult;
@@ -235,7 +235,7 @@ namespace PharmaStoreAPI.UnitTests.Controllers
         public void AddMedicine_InvalidData_ModelStateError()
         {
             // Arrange
-            MedicinesController medicinesController = new MedicinesController(It.IsAny<IMedicinesRepository>());
+            var medicinesController = new MedicinesController(It.IsAny<IMedicinesRepository>());
 
             medicinesController.ModelState.AddModelError(string.Empty, string.Empty);
 
@@ -253,7 +253,7 @@ namespace PharmaStoreAPI.UnitTests.Controllers
         public void AddMedicine_NullInputModel_ModelStateError()
         {
             // Arrange
-            MedicinesController medicinesController = new MedicinesController(It.IsAny<IMedicinesRepository>());
+            var medicinesController = new MedicinesController(It.IsAny<IMedicinesRepository>());
 
             // Act
             var result = medicinesController.AddMedicine(It.IsAny<MedicineInputModel>()) as BadRequestObjectResult;
@@ -291,7 +291,7 @@ namespace PharmaStoreAPI.UnitTests.Controllers
                             nameof(model.Description))
                     }));
 
-            MedicinesController medicinesController = new MedicinesController(mock.Object);
+            var medicinesController = new MedicinesController(mock.Object);
 
             // Act
             var result = medicinesController.AddMedicine(model) as BadRequestObjectResult;
@@ -302,6 +302,62 @@ namespace PharmaStoreAPI.UnitTests.Controllers
             Assert.IsNotNull(response);
             Assert.AreEqual(3, response.Count());
             Assert.AreEqual((int)ErrorCodes.BadRequest, response.First().ErrorCode);
+        }
+
+        [Test]
+        public void GetMedicineTypes_CorrectData_ListOfMedicineTypes()
+        {
+            // Arrange
+            mock.Setup(x => x.GetMedicineTypes())
+                .Returns(() =>
+                    new OperationResult<IEnumerable<MedicineType>>(new List<MedicineType>
+                    {
+                        new MedicineType
+                        {
+                            Id = 1,
+                            Name = "Liquid"
+                        },
+                        new MedicineType
+                        {
+                            Id = 2,
+                            Name = "Tablet"
+                        }
+                    }));
+
+            var medicinesController = new MedicinesController(mock.Object);
+
+            // Act
+            var result = medicinesController.GetMedicineTypes() as OkObjectResult;
+            var response = result.Value as Result<IEnumerable<MedicineType>>;
+
+            // Assert
+            Assert.AreEqual((int)HttpStatusCode.OK, result.StatusCode);
+            Assert.IsNotNull(response.Items);
+            Assert.AreEqual(2, response.TotalCount);
+            Assert.AreEqual(2, response.Items.Count());
+        }
+
+        [Test]
+        public void GetMedicineTypes_DatabaseConnectionProblem_DatabaseError()
+        {
+            // Arrange
+            mock.Setup(x => x.GetMedicineTypes())
+                .Returns(() =>
+                    new OperationResult<IEnumerable<MedicineType>>(
+                        new OperationError((int) ErrorCodes.InternalServerError, ErrorResources.DatabaseError)));
+
+            var medicinesController = new MedicinesController(mock.Object);
+
+            // Act
+            var result = medicinesController.GetMedicineTypes() as BadRequestObjectResult;
+            var response = result.Value as IEnumerable<OperationError>;
+
+            // Assert
+            Assert.AreEqual((int)HttpStatusCode.BadRequest, result.StatusCode);
+            Assert.IsNotNull(response);
+            Assert.AreEqual(1, response.Count());
+            Assert.AreEqual(ErrorResources.DatabaseError, response.Single().Message);
+            Assert.AreEqual((int)ErrorCodes.InternalServerError, response.Single().ErrorCode);
         }
     }
 }
