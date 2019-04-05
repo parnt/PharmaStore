@@ -19,20 +19,21 @@
             {
                 var context = new PharmaStoreContext();
 
-                var medicineList = context.Medicines.Where(x => string.IsNullOrEmpty(filters.SearchValue)
-                    ? true
-                    : (x.MedicineType.Name.Contains(filters.SearchValue) ||
-                       x.ContentQuantity.Contains(filters.SearchValue) ||
-                       x.Id.ToString().Contains(filters.SearchValue) ||
-                       x.Name.Contains(filters.SearchValue) ||
-                       x.Producer.Contains(filters.SearchValue))).Select(x => new MedicineHeader
-                       {
-                           Id = x.Id,
-                           Name = x.Name,
-                           ContentQuantity = x.ContentQuantity,
-                           Producer = x.Producer,
-                           Price = x.Price
-                       }).ToList();
+                var medicineList = context.Medicines.Where(x =>
+                    (filters == null || string.IsNullOrEmpty(filters.SearchValue))
+                        ? true
+                        : (x.MedicineType.Name.Contains(filters.SearchValue) ||
+                           x.ContentQuantity.Contains(filters.SearchValue) ||
+                           x.Id.ToString().Contains(filters.SearchValue) ||
+                           x.Name.Contains(filters.SearchValue) ||
+                           x.Producer.Contains(filters.SearchValue))).Select(x => new MedicineHeader
+                        {
+                            Id = x.Id,
+                            Name = x.Name,
+                            ContentQuantity = x.ContentQuantity,
+                            Producer = x.Producer,
+                            Price = x.Price
+                        }).ToList();
 
                 return new OperationResult<IEnumerable<MedicineHeader>>(medicineList);
             }

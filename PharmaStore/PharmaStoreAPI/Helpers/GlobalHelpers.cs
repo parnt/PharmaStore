@@ -8,7 +8,7 @@
     public static class GlobalHelpers
     {
         public static OperationError ModelStateError() =>
-            new OperationError((int) ErrorCodes.BadRequest, ErrorResources.ModalStateError);
+            new OperationError((int) ErrorCodes.BadRequest, ErrorResources.ModelStateError);
 
         public static string TrimString(this string str) => str?.Trim() ?? str;
 

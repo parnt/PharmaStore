@@ -132,7 +132,7 @@
   <data name="ItemNotFound" xml:space="preserve">
     <value>Nie znaleziono przedmiotu o podanym ID</value>
   </data>
-  <data name="ModalStateError" xml:space="preserve">
+  <data name="ModelStateError" xml:space="preserve">
     <value>Wprowadzono dane w niewłaściwy sposób</value>
   </data>
 </root>

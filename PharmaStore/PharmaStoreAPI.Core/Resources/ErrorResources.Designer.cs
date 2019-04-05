@@ -108,9 +108,9 @@ namespace PharmaStoreAPI.Core.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Wprowadzono dane w niewłaściwy sposób.
         /// </summary>
-        public static string ModalStateError {
+        public static string ModelStateError {
             get {
-                return ResourceManager.GetString("ModalStateError", resourceCulture);
+                return ResourceManager.GetString("ModelStateError", resourceCulture);
             }
         }
     }

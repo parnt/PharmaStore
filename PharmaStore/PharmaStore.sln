@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmaStoreAPI", "PharmaStoreAPI\PharmaStoreAPI.csproj", "{7F923DAC-7FE6-4541-B721-0FE3B7229AA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PharmaStoreAPI", "PharmaStoreAPI\PharmaStoreAPI.csproj", "{7F923DAC-7FE6-4541-B721-0FE3B7229AA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmaStoreWeb", "PharmaStoreWeb\PharmaStoreWeb.csproj", "{AB6C50B6-28D6-4E44-ADC2-09B60A3D59F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PharmaStoreWeb", "PharmaStoreWeb\PharmaStoreWeb.csproj", "{AB6C50B6-28D6-4E44-ADC2-09B60A3D59F6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{D2C4E1A8-939B-4439-BBCA-2FEDF5445349}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApplication", "WebApplication", "{F59CA064-66CB-4564-A6E7-CF3F14AC3479}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmaStoreAPI.Core", "PharmaStoreAPI.Core\PharmaStoreAPI.Core.csproj", "{7652416C-993A-4F22-A34E-B20DD2782E04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PharmaStoreAPI.Core", "PharmaStoreAPI.Core\PharmaStoreAPI.Core.csproj", "{7652416C-993A-4F22-A34E-B20DD2782E04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmaStoreAPI.UnitTests", "PharmaStoreAPI.UnitTests\PharmaStoreAPI.UnitTests.csproj", "{264AC940-9757-4094-BD31-95BB906FD7B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +33,10 @@ Global
 		{7652416C-993A-4F22-A34E-B20DD2782E04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7652416C-993A-4F22-A34E-B20DD2782E04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7652416C-993A-4F22-A34E-B20DD2782E04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{264AC940-9757-4094-BD31-95BB906FD7B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{264AC940-9757-4094-BD31-95BB906FD7B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{264AC940-9757-4094-BD31-95BB906FD7B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{264AC940-9757-4094-BD31-95BB906FD7B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,6 +45,7 @@ Global
 		{7F923DAC-7FE6-4541-B721-0FE3B7229AA6} = {D2C4E1A8-939B-4439-BBCA-2FEDF5445349}
 		{AB6C50B6-28D6-4E44-ADC2-09B60A3D59F6} = {F59CA064-66CB-4564-A6E7-CF3F14AC3479}
 		{7652416C-993A-4F22-A34E-B20DD2782E04} = {D2C4E1A8-939B-4439-BBCA-2FEDF5445349}
+		{264AC940-9757-4094-BD31-95BB906FD7B2} = {D2C4E1A8-939B-4439-BBCA-2FEDF5445349}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C1FDBA1A-51BF-4DB8-8691-A7D359195AD6}

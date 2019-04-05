@@ -4,6 +4,7 @@
     using Core.ViewModels.Medicines;
     using Microsoft.AspNetCore.Mvc;
     using PharmaStoreAPI.Helpers;
+    using System.ComponentModel.DataAnnotations;
 
     [Route("api/[controller]")]
     [ApiController]
@@ -26,7 +27,8 @@
         {
             if (ModelState.IsValid)
             {
-                filters.SearchValue = filters.SearchValue.TrimString();
+                if(filters != null)
+                    filters.SearchValue = filters.SearchValue.TrimString();
 
                 var result = _medicinesRepository.GetMedicineList(filters);
 
@@ -70,9 +72,9 @@
         /// <param name="newMedicine"></param>
         /// <returns>Information about complete operation</returns>
         [HttpPost]
-        public IActionResult AddMedicine([FromBody] MedicineInputModel newMedicine)
+        public IActionResult AddMedicine([FromBody][Required] MedicineInputModel newMedicine)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && newMedicine != null)
             {
                 newMedicine = newMedicine.TrimObj();
 
