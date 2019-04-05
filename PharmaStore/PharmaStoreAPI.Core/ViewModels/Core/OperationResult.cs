@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace PharmaStoreAPI.Core.ViewModels.Core
+﻿namespace PharmaStoreAPI.Core.ViewModels.Core
 {
+    using System.Collections.Generic;
+
     public class OperationResult<T> where T : class
     {
         public Result<T> Result { get; set; }

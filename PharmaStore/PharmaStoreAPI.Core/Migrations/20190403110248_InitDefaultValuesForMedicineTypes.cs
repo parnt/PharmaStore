@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace PharmaStoreAPI.Core.Migrations
 {
+    [ExcludeFromCodeCoverage]
     public partial class InitDefaultValuesForMedicineTypes : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

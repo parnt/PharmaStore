@@ -4,9 +4,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PharmaStoreAPI.Core.Models;
+using System.Diagnostics.CodeAnalysis;
 
 namespace PharmaStoreAPI.Core.Migrations
 {
+    [ExcludeFromCodeCoverage]
     [DbContext(typeof(PharmaStoreContext))]
     partial class PharmaStoreContextModelSnapshot : ModelSnapshot
     {

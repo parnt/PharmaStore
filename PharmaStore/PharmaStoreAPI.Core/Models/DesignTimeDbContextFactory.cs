@@ -2,9 +2,11 @@
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace PharmaStoreAPI.Core.Models
 {
+    [ExcludeFromCodeCoverage]
     public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<PharmaStoreContext>
     {
         PharmaStoreContext IDesignTimeDbContextFactory<PharmaStoreContext>.CreateDbContext(string[] args)

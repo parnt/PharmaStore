@@ -4,7 +4,9 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
+    [ExcludeFromCodeCoverage]
     public partial class PharmaStoreContext : DbContext
     {
         public PharmaStoreContext()

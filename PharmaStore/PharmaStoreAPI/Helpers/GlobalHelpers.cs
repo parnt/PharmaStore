@@ -18,18 +18,11 @@
 
             foreach (var field in objectStringFields)
             {
-                try
+                var value = (string)field.GetValue(obj, null);
+                if (!string.IsNullOrEmpty(value))
                 {
-                    var value = (string)field.GetValue(obj, null);
-                    if (!string.IsNullOrEmpty(value))
-                    {
-                        field.SetValue(obj, value.Trim(), null);
+                    field.SetValue(obj, value.Trim(), null);
                     }
-                }
-                catch
-                {
-                    continue;
-                }
             }
 
             return obj;
