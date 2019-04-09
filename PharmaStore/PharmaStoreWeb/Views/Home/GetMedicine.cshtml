@@ -1,4 +1,5 @@
-﻿@model PharmaStoreWeb.Models.Core.OperationResult<PharmaStoreWeb.Models.Medicines.Medicine>;
+﻿@using PharmaStoreWeb.Helpers
+@model PharmaStoreWeb.Models.Core.OperationResult<PharmaStoreWeb.Models.Medicines.Medicine>;
 @{
     ViewData["Title"] = "GetMedicine";
 }
@@ -9,7 +10,7 @@
     @if (Model.IsSuccess)
     {
         <h1 class="display-4">Szczegóły leku</h1>
-        <table>
+        <table class="table-det">
             <tr>
                 <td class="head-itm title">Nazwa</td>
                 <td>@Model.Result.Items.Name</td>
@@ -28,10 +29,10 @@
             </tr>
             <tr>
                 <td class="head-itm title">Cena</td>
-                <td>@Model.Result.Items.Price</td>
+                <td>@GlobalHelpers.ParsePriceWithCurrency(Model.Result.Items.Price.ToString(), "zł")</td>
             </tr>
         </table>
-        <table>
+        <table class="table-det">
             <tr class="desc">
                 <td class="head-itm title desc">Opis</td>
             </tr>
@@ -49,53 +50,4 @@
         }
     }
 </div>
-<style>
-    .details {
-        width: 50%;
-        margin: 0px auto;
-    }
-
-    .row {
-        clear: both;
-    }
-
-    .next-itm {
-        float: left;
-    }
-
-    .head-itm {
-        font-weight: bold;
-    }
-
-    .title {
-        width: 20%;
-    }
-
-    table {
-        width: 50%;
-        margin: 0px auto;
-    }
-
-    th, td {
-        text-align: center;
-        border-bottom: 1px solid #ddd;
-        padding: 20px;
-    }
-
-    h1 {
-        margin-bottom: 30px;
-    }
-
-    .desc {
-        padding-top: 60px;
-    }
-
-    .back {
-        color: #aaa;
-    }
-
-    .back:hover {
-        color: #ccc;
-        text-decoration: none;
-    }
-</style>
+<link rel="stylesheet" type="text/css" href="~/css/custom.css">
