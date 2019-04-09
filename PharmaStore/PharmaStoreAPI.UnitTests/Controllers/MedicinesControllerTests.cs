@@ -101,12 +101,12 @@ namespace PharmaStoreAPI.UnitTests.Controllers
 
             // Act
             var result = medicinesController.GetMedicineList(It.IsAny<GetMedicinesViewModel>()) as BadRequestObjectResult;
-            var response = result.Value as OperationError;
+            var response = result.Value as List<OperationError>;
 
             // Assert
             Assert.AreEqual((int)HttpStatusCode.BadRequest, result.StatusCode);
             Assert.IsNotNull(response);
-            Assert.AreEqual(ErrorResources.ModelStateError, response.Message);
+            Assert.AreEqual(ErrorResources.ModelStateError, response.Single().Message);
         }
 
         [Test]
@@ -171,12 +171,12 @@ namespace PharmaStoreAPI.UnitTests.Controllers
 
             // Act
             var result = medicinesController.GetSpecificMedicineDetails(It.IsAny<int>()) as BadRequestObjectResult;
-            var response = result.Value as OperationError;
+            var response = result.Value as List<OperationError>;
 
             // Assert
             Assert.AreEqual((int)HttpStatusCode.BadRequest, result.StatusCode);
             Assert.IsNotNull(response);
-            Assert.AreEqual(ErrorResources.ModelStateError, response.Message);
+            Assert.AreEqual(ErrorResources.ModelStateError, response.Single().Message);
         }
 
         [Test]
@@ -241,12 +241,12 @@ namespace PharmaStoreAPI.UnitTests.Controllers
 
             // Act
             var result = medicinesController.AddMedicine(It.IsAny<MedicineInputModel>()) as BadRequestObjectResult;
-            var response = result.Value as OperationError;
+            var response = result.Value as List<OperationError>;
 
             // Assert
             Assert.AreEqual((int)HttpStatusCode.BadRequest, result.StatusCode);
             Assert.IsNotNull(response);
-            Assert.AreEqual(ErrorResources.ModelStateError, response.Message);
+            Assert.AreEqual(ErrorResources.ModelStateError, response.Single().Message);
         }
 
         [Test]
@@ -257,12 +257,12 @@ namespace PharmaStoreAPI.UnitTests.Controllers
 
             // Act
             var result = medicinesController.AddMedicine(It.IsAny<MedicineInputModel>()) as BadRequestObjectResult;
-            var response = result.Value as OperationError;
+            var response = result.Value as List<OperationError>;
 
             // Assert
             Assert.AreEqual((int)HttpStatusCode.BadRequest, result.StatusCode);
             Assert.IsNotNull(response);
-            Assert.AreEqual(ErrorResources.ModelStateError, response.Message);
+            Assert.AreEqual(ErrorResources.ModelStateError, response.Single().Message);
         }
 
         [Test]

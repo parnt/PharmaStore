@@ -3,14 +3,15 @@
     using Core.Enums;
     using Core.Resources;
     using Core.ViewModels.Core;
+    using System.Collections.Generic;
     using System.Linq;
 
     public static class GlobalHelpers
     {
-        public static OperationError ModelStateError() =>
-            new OperationError((int) ErrorCodes.BadRequest, ErrorResources.ModelStateError);
+        public static List<OperationError> ModelStateError() => new List<OperationError>
+            {new OperationError((int) ErrorCodes.BadRequest, ErrorResources.ModelStateError)};
 
-        public static string TrimString(this string str) => str?.Trim() ?? str;
+    public static string TrimString(this string str) => str?.Trim() ?? str;
 
         public static T TrimObj<T>(this T obj)
         {

@@ -1,8 +1,81 @@
-﻿@{
+﻿@model PharmaStoreWeb.Models.Core.OperationResult<IEnumerable<PharmaStoreWeb.Models.Medicines.MedicineHeader>>
+
+@{
     ViewData["Title"] = "Home Page";
 }
-
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    @if (Model.IsSuccess)
+    {
+        <h1 class="display-4">Lista leków</h1>
+        <table class="page-width" id="medicineList">
+            <tr>
+                <th>Producent</th>
+                <th>Nazwa</th>
+                <th>Pojemność</th>
+                <th>Cena</th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model.Result.Items)
+            {
+                <tr class="tr">
+                    <td>@item.Producer</td>
+                    <td>@item.Name</td>
+                    <td>@item.ContentQuantity</td>
+                    <td>@item.Price</td>
+                    <td><a href="@Url.Action("GetMedicine", "Home", new {item.Id})">Podgląd</a></td>
+                </tr>
+            }
+            <tr>
+                <td/>
+                <td/>
+                <td/>
+                <td/>
+                <td><a class="new" href="@Url.Action("Index")"><h3>Dodaj</h3></a></td>
+            </tr>
+        </table>
+    }
+    else
+    {
+        <h1 class="display-4">Wystąpił błąd</h1>
+        foreach (var error in Model.Errors)
+        {
+            <div>@error.Message</div>
+        }
+    }
 </div>
+<style>
+    table {
+        margin: 0px auto;
+    }
+
+    th {
+        height: 50px;
+    }
+
+    th, td {
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+        padding: 20px;
+    }
+
+    .tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+
+    .new {
+        float: right;
+        color: #00b300;
+    }
+
+    .new:hover {
+        color: #00e600;
+    }
+
+    .page-width {
+        width: 70%
+    }
+</style>

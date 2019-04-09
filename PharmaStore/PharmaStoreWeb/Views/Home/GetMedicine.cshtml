@@ -1,0 +1,101 @@
+﻿@model PharmaStoreWeb.Models.Core.OperationResult<PharmaStoreWeb.Models.Medicines.Medicine>;
+@{
+    ViewData["Title"] = "GetMedicine";
+}
+<div>
+    <a class="back" href="@Url.Action("Index")">Powrót</a>
+</div>
+<div class="text-center">
+    @if (Model.IsSuccess)
+    {
+        <h1 class="display-4">Szczegóły leku</h1>
+        <table>
+            <tr>
+                <td class="head-itm title">Nazwa</td>
+                <td>@Model.Result.Items.Name</td>
+            </tr>
+            <tr>
+                <td class="head-itm title">Typ</td>
+                <td>@Model.Result.Items.MedicineTypeName</td>
+            </tr>
+            <tr>
+                <td class="head-itm title">Opakowanie</td>
+                <td>@Model.Result.Items.ContentQuantity</td>
+            </tr>
+            <tr>
+                <td class="head-itm title">Producent</td>
+                <td>@Model.Result.Items.Producer</td>
+            </tr>
+            <tr>
+                <td class="head-itm title">Cena</td>
+                <td>@Model.Result.Items.Price</td>
+            </tr>
+        </table>
+        <table>
+            <tr class="desc">
+                <td class="head-itm title desc">Opis</td>
+            </tr>
+            <tr>
+                <td>@Model.Result.Items.Description</td>
+            </tr>
+        </table>
+    }
+    else
+    {
+        <h1 class="display-4">Wystąpił błąd</h1>
+        foreach (var error in Model.Errors)
+        {
+            <div>@error.Message</div>
+        }
+    }
+</div>
+<style>
+    .details {
+        width: 50%;
+        margin: 0px auto;
+    }
+
+    .row {
+        clear: both;
+    }
+
+    .next-itm {
+        float: left;
+    }
+
+    .head-itm {
+        font-weight: bold;
+    }
+
+    .title {
+        width: 20%;
+    }
+
+    table {
+        width: 50%;
+        margin: 0px auto;
+    }
+
+    th, td {
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+        padding: 20px;
+    }
+
+    h1 {
+        margin-bottom: 30px;
+    }
+
+    .desc {
+        padding-top: 60px;
+    }
+
+    .back {
+        color: #aaa;
+    }
+
+    .back:hover {
+        color: #ccc;
+        text-decoration: none;
+    }
+</style>
